@@ -1,0 +1,40 @@
+group 'com.holi'
+version '1.0'
+
+apply plugin: 'java'
+
+def jdkVersion = 1.7
+sourceCompatibility = jdkVersion
+targetCompatibility = jdkVersion
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.springframework:spring-webmvc:4.3.2.RELEASE'
+
+  testCompile 'org.eclipse.jetty:jetty-webapp:8.0.0.v20110901'
+  testCompile 'org.eclipse.jetty:jetty-annotations:8.0.0.v20110901'
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.hamcrest:hamcrest-library:1.3'
+
+  compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
+}
+
+//set compiler encoding explicitly
+def fileEncoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+  options.encoding = fileEncoding
+}
+
+//set test file encoding explicity
+test {
+  systemProperty 'file.encoding', fileEncoding
+}
+
+//exclude idea & gradle configuration files in idea project.
+apply plugin: 'idea'
+idea.module.excludeDirs += ['.idea', '.gradle', 'gradle'].collect {
+  return file(it);
+};
