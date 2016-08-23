@@ -1,0 +1,1 @@
+# How to solving the embedded jetty server can't discover Spring WebApplicationInitializer? 
